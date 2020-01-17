@@ -7,9 +7,6 @@ solr::archive_url: "http://archive.apache.org/dist/lucene/solr/%{version}"
 # name of the archive file to download
 solr::archive_name: "solr-%{version}.tgz"
 
-# Checksum type to download
-solr::checksum_type: 'sha512'
-
 # Sets the user for file ownership. Valid options: any valid user. Default: `solr`
 solr::user: 'solr'
 # Sets whether or not this instance will manage the defined user. Valid options: `true` or `false`. Default: `true`.

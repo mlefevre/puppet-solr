@@ -2,7 +2,8 @@
 # Class: solr
 # ===========================
 #
-# Full description of class solr here.
+# Description of class solr here.
+# This description aimed to deploy the old version 1.4.1 of Solr.
 # Examples
 # --------
 #
@@ -16,11 +17,7 @@
 #
 # Michael Strache <michael.strache@netcentric.biz>
 # Valentin Savenko <valentin.savenko@netcentric.biz>
-#
-# Copyright
-# ---------
-#
-# Copyright 2018 Michael Strache & Valentin Savenko, Netcentric
+# Marc Lefèvre <mlefevre@cirb.brussels>
 #
 
 
@@ -34,12 +31,9 @@ class solr (
   String  $version,
   String  $archive_url,
   String  $archive_name,
-  String  $checksum_type,
   Integer $port,
   String  $memory,
-  Boolean $jmx_remote,
   String  $data_dir,
-  Optional[Array[String]] $zk_hosts,
 ) {
 
   #------------------------------------------------------------------------------#
@@ -70,8 +64,7 @@ class solr (
   # Download the installer archive and extract the install script
   $install_archive = "${install_dir}/${archive_name}"
   archive { $install_archive:
-    checksum_type => $checksum_type,
-    checksum_url  => "${archive_url}/${archive_name}.${checksum_type}",
+    checksum_verify  => false,
     cleanup       => false,
     creates       => 'dummy_value', # extract every time. This is needed because archive has unexpected behaviour without it. (seems to be mandatory, instead of optional)
     extract       => true,
