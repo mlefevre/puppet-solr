@@ -114,10 +114,4 @@ class solr (
     }
   }
 
-  # start and enable solr service
-  service { $service_name:
-    ensure => running,
-    enable => true,
-  }
-
 }
