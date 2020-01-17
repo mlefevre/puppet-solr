@@ -136,16 +136,6 @@ class solr (
     }
   }
 
-  if $jmx_remote {
-    file_line { 'Enable JMX remote':
-      notify  => Service[$service_name],
-      path    => $config_file,
-      line    => "ENABLE_REMOTE_JMX_OPTS=\"true\"",
-      match   => '.*ENABLE_REMOTE_JMX_OPTS=.*',
-      require => File[$config_file],
-    }
-  }
-
   # start and enable solr service
   service { $service_name:
     ensure => running,
