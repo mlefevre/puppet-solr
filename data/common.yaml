@@ -9,13 +9,9 @@ solr::archive_name: "solr-%{version}.tgz"
 
 # Sets the user for file ownership. Valid options: any valid user. Default: `solr`
 solr::user: 'solr'
-# Sets whether or not this instance will manage the defined user. Valid options: `true` or `false`. Default: `true`.
-solr::manage_user: true
 
 # Sets the group for file ownership. Valid options: any valid group. Default: 'solr'
 solr::group: 'solr'
-# Sets whether or not this instance will manage the defined group. Valid options: `true` or `false`. Default: `true`.
-solr::manage_group: true
 
 # The Solr package will be downloaded & installed here
 solr::install_dir: '/opt'

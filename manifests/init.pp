@@ -23,9 +23,7 @@
 
 class solr (
   String  $user,
-  Boolean $manage_user,
   String  $group,
-  Boolean $manage_group,
   String  $install_dir,
   String  $service_name,
   String  $version,
@@ -41,19 +39,6 @@ class solr (
   #------------------------------------------------------------------------------#
   # So far based on https://lucene.apache.org/solr/guide/7_1/taking-solr-to-production.html#taking-solr-to-production
 
-
-  if $manage_group {
-    group { $group:
-      ensure => 'present',
-    }
-  }
-
-  if $manage_user {
-    user { $user:
-      ensure => 'present',
-      gid    => $group,
-    }
-  }
 
 
   # solr dependency on RedHat servers
