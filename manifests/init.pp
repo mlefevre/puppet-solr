@@ -146,18 +146,6 @@ class solr (
     }
   }
 
-  if $zk_hosts {
-    $zk_hosts_options = $zk_hosts.join(',')
-    file_line { 'Append zookeeper settings to the default config file for the solr service':
-      notify  => Service[$service_name],
-      path    => $config_file,
-      line    => "ZK_HOST=\"${zk_hosts_options}\"",
-      match   => '.*ZK_HOST=.*',
-      require => File[$config_file],
-    }
-  }
-
-
   # start and enable solr service
   service { $service_name:
     ensure => running,
