@@ -3,13 +3,16 @@
 # ===========================
 #
 # Description of class solr here.
-# This description aimed to deploy the old version 1.4.1 of Solr.
+# This description aimed to deploy the Solr 1.4.1 provided with Alfresco 4.2
+# 
+# Solr will be deployed on an existing tomcat server.
 # Examples
 # --------
 #
 # @example
 #    class { 'solr':
 #      version => '7.7.0',
+#      install_dir => 'tomcat/webapps'
 #    }
 #
 # Authors
@@ -39,29 +42,20 @@ class solr (
   #------------------------------------------------------------------------------#
   # So far based on https://lucene.apache.org/solr/guide/7_1/taking-solr-to-production.html#taking-solr-to-production
 
-
-
   # solr dependency on RedHat servers
   package { 'lsof':
     ensure => 'installed',
   }
 
-  # Download the installer archive and extract the install script
+  # Download and extract the alfresco archive
   $install_archive = "${install_dir}/${archive_name}"
   archive { $install_archive:
     checksum_verify  => false,
-    cleanup       => false,
-    creates       => 'dummy_value', # extract every time. This is needed because archive has unexpected behaviour without it. (seems to be mandatory, instead of optional)
     extract       => true,
     extract_path  => $install_dir,
-    source        => "${archive_url}/${archive_name}"
-  }
-
-  # Create instance data folder
-  file { $data_dir:
-    recurse => true,
-    owner   => $user,
-    group   => $group,
+    creates       => true, 
+    source        => "${archive_url}/${archive_name}",
+    cleanup       => true,
   }
 
 }

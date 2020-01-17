@@ -3,9 +3,9 @@
 # Solr version to download an install
 solr::version: '1.4.1'
 # url to download Solr archive
-solr::archive_url: "http://archive.apache.org/dist/lucene/solr/%{version}"
+solr::archive_url: "https://master.dl.sourceforge.net/project/alfresco/Alfresco%204.2.f%20Community"
 # name of the archive file to download
-solr::archive_name: "solr-%{version}.tgz"
+solr::archive_name: "alfresco-community-solr-4.2.f.zip"
 
 # Sets the user for file ownership. Valid options: any valid user. Default: `solr`
 solr::user: 'solr'
@@ -14,10 +14,10 @@ solr::user: 'solr'
 solr::group: 'solr'
 
 # The Solr package will be downloaded & installed here
-solr::install_dir: '/opt'
+solr::install_dir: '/opt/tomcat/data/'
 
 # All Instance specific data will be stored here
-solr::data_dir: '/opt/solr_data'
+solr::data_dir: '/opt/tomcat/data/workspace'
 
 # The name of the init.d service 
 solr::service_name: 'solr'
