@@ -58,7 +58,7 @@ class solr (
     cleanup       => true,
   }->
   exec {"Configure workspace in solcore.proprerties":
-    command => "sed -i -E 's|@@ALFRESCO_SOLR_DIR@@|${install_dir}|g' ${install_dir}/workspace-SpacesStore/conf/solrcore.properties ${install_dir}/data/archive-SpacesStore/conf/solrcore.properties"
+    command => "sed -i -E 's|@@ALFRESCO_SOLR_DIR@@|${install_dir}|g' ${install_dir}/workspace-SpacesStore/conf/solrcore.properties ${install_dir}/archive-SpacesStore/conf/solrcore.properties"
   }->
   exec {"Configure truststore and keystore in solrcore.properties":
     command => "sed -i -E 's|=ssl-(.+)store|=ssl-repo-client-\1store|g' ${install_dir}/workspace-SpacesStore/conf/solrcore.properties ${install_dir}/archive-SpacesStore/conf/solrcore.properties"
