@@ -56,6 +56,31 @@ class solr (
     creates       => "${install_dir}",
     source        => "${archive_url}/${archive_name}",
     cleanup       => true,
+  }->
+  exec {"Configure workspace in solcore.proprerties":
+    command => "sed -i -E 's|@@ALFRESCO_SOLR_DIR@@|${install_dir}|g' ${install_dir}/workspace-SpacesStore/conf/solrcore.properties ${install_dir}/data/archive-SpacesStore/conf/solrcore.properties"
+  }->
+  exec {"Configure truststore and keystore in solrcore.properties":
+    command => "sed -i -E 's|=ssl-(.+)store|=ssl-repo-client-\1store|g' ${install_dir}/workspace-SpacesStore/conf/solrcore.properties ${install_dir}/archive-SpacesStore/conf/solrcore.properties"
+  }->
+  file {"Remove default keystore":
+    ensure => absent,
+    recurse => true,
+    purge => true,
+    path => "${install_dir}/alf_data/keystore"
+  }->
+  file {"Remove default password files in workspace-SpaceStore":
+    ensure =>absent,
+    path => "${install_dir}/workspace-SpacesStore/conf/*passwords.properties"
+  }->
+  file {"Remove default password files in archive-SpaceStore":
+    ensure =>absent,
+    path => "${install_dir}/archive-SpacesStore/conf/*passwords.properties"
+#  }->
+#  file {"Add keystore/truststore ...":
+#    ensure => file,
+#    content => "",
+#    path => ""
   }
 
 }
