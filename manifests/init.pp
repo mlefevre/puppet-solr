@@ -53,7 +53,7 @@ class solr (
     checksum_verify  => false,
     extract       => true,
     extract_path  => $install_dir,
-    creates       => true, 
+    creates       => "${install_dir}",
     source        => "${archive_url}/${archive_name}",
     cleanup       => true,
   }
