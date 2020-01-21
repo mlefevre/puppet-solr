@@ -11,7 +11,7 @@
 #
 # @example
 #    class { 'solr':
-#      version => '7.7.0',
+#      version => '1.4.1',
 #      install_dir => 'tomcat/webapps'
 #    }
 #
@@ -40,7 +40,6 @@ class solr (
   #------------------------------------------------------------------------------#
   # Code                                                                         #
   #------------------------------------------------------------------------------#
-  # So far based on https://lucene.apache.org/solr/guide/7_1/taking-solr-to-production.html#taking-solr-to-production
 
   # solr dependency on RedHat servers
   package { 'lsof':
@@ -50,6 +49,8 @@ class solr (
   # Download and extract the alfresco archive
   $install_archive = "${install_dir}/${archive_name}"
   archive { $install_archive:
+    user          => $user,
+    group         => $group,
     checksum_verify  => false,
     extract       => true,
     extract_path  => $install_dir,
@@ -81,56 +82,56 @@ class solr (
       ensure  => file,
       owner   => $user,
       group   => $group,
-      mode    => '0755',
+      mode    => '0644',
       source => 'puppet:///modules/application/bosecr2/solr/ssl.repo.client.keystore'
   }->
   file {"${install_dir}/workspace-SpacesStore/conf/ssl-repo-client-keystore-passwords.properties":
       ensure  => file,
       owner   => $user,
       group   => $group,
-      mode    => '0755',
+      mode    => '0644',
       source => 'puppet:///modules/application/bosecr2/solr/ssl-repo-client-keystore-passwords.properties'
   }->
   file {"${install_dir}/workspace-SpacesStore/conf/ssl.repo.client.truststore":
       ensure  => file,
       owner   => $user,
       group   => $group,
-      mode    => '0755',
+      mode    => '0644',
       source => 'puppet:///modules/application/bosecr2/solr/ssl.repo.client.truststore'
   }->
   file {"${install_dir}/workspace-SpacesStore/conf/ssl-repo-client-truststore-passwords.properties":
       ensure  => file,
       owner   => $user,
       group   => $group,
-      mode    => '0755',
+      mode    => '0644',
       source => 'puppet:///modules/application/bosecr2/solr/ssl-repo-client-truststore-passwords.properties'
   }->
   file {"${install_dir}/archive-SpacesStore/conf/ssl.repo.client.keystore":
       ensure  => file,
       owner   => $user,
       group   => $group,
-      mode    => '0755',
+      mode    => '0644',
       source => 'puppet:///modules/application/bosecr2/solr/ssl.repo.client.keystore'
   }->
   file {"${install_dir}/archive-SpacesStore/conf/ssl-repo-client-keystore-passwords.properties":
       ensure  => file,
       owner   => $user,
       group   => $group,
-      mode    => '0755',
+      mode    => '0644',
       source => 'puppet:///modules/application/bosecr2/solr/ssl-repo-client-keystore-passwords.properties'
   }->
   file {"${install_dir}/archive-SpacesStore/conf/ssl.repo.client.truststore":
       ensure  => file,
       owner   => $user,
       group   => $group,
-      mode    => '0755',
+      mode    => '0644',
       source => 'puppet:///modules/application/bosecr2/solr/ssl.repo.client.truststore'
   }->
   file {"${install_dir}/archive-SpacesStore/conf/ssl-repo-client-truststore-passwords.properties":
       ensure  => file,
       owner   => $user,
       group   => $group,
-      mode    => '0755',
+      mode    => '0644',
       source => 'puppet:///modules/application/bosecr2/solr/ssl-repo-client-truststore-passwords.properties'
   }
 

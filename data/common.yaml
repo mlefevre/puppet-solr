@@ -26,5 +26,5 @@ solr::service_name: 'solr'
 solr::memory: '-Xms2048m -Xmx2048m'
 
 # Start Solr on the defined port.
-solr::port: 8983
+solr::port: 8081
 
