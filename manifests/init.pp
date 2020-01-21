@@ -35,10 +35,11 @@ class solr (
   # Code                                                                         #
   #------------------------------------------------------------------------------#
 
+  $install_archive = "${install_dir}/${archive_name}"
   # solr dependency on RedHat servers
   package { 'lsof':
     ensure => 'installed',
-  }
+  }->
   file { "${install_dir}":
     ensure => directory,
     owner => $user,
@@ -46,7 +47,6 @@ class solr (
     mode => 0755,
   }->
   # Download and extract the alfresco archive
-  $install_archive = "${install_dir}/${archive_name}"
   archive { $install_archive:
     user          => $user,
     group         => $group,
