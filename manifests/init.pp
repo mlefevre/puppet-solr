@@ -11,7 +11,6 @@
 #
 # @example
 #    class { 'solr':
-#      version => '1.4.1',
 #      install_dir => 'tomcat/webapps'
 #    }
 #
@@ -28,13 +27,8 @@ class solr (
   String  $user,
   String  $group,
   String  $install_dir,
-  String  $service_name,
-  String  $version,
   String  $archive_url,
   String  $archive_name,
-  Integer $port,
-  String  $memory,
-  String  $data_dir,
 ) {
 
   #------------------------------------------------------------------------------#
@@ -45,7 +39,12 @@ class solr (
   package { 'lsof':
     ensure => 'installed',
   }
-
+  file { "${install_dir}":
+    ensure => directory,
+    owner => $user,
+    group => $group,
+    mode => 0755,
+  }->
   # Download and extract the alfresco archive
   $install_archive = "${install_dir}/${archive_name}"
   archive { $install_archive:
