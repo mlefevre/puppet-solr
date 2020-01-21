@@ -76,11 +76,62 @@ class solr (
   file {"Remove default password files in archive-SpaceStore":
     ensure =>absent,
     path => "${install_dir}/archive-SpacesStore/conf/*passwords.properties"
-#  }->
-#  file {"Add keystore/truststore ...":
-#    ensure => file,
-#    content => "",
-#    path => ""
+  }->
+  file {"${install_dir}/workspace-SpacesStore/conf/ssl.repo.client.keystore":
+      ensure  => file,
+      owner   => $user,
+      group   => $group,
+      mode    => '0755',
+      source => 'puppet:///modules/application/bosecr2/solr/ssl.repo.client.keystore'
+  }->
+  file {"${install_dir}/workspace-SpacesStore/conf/ssl-repo-client-keystore-passwords.properties":
+      ensure  => file,
+      owner   => $user,
+      group   => $group,
+      mode    => '0755',
+      source => 'puppet:///modules/application/bosecr2/solr/ssl-repo-client-keystore-passwords.properties'
+  }->
+  file {"${install_dir}/workspace-SpacesStore/conf/ssl.repo.client.truststore":
+      ensure  => file,
+      owner   => $user,
+      group   => $group,
+      mode    => '0755',
+      source => 'puppet:///modules/application/bosecr2/solr/ssl.repo.client.truststore'
+  }->
+  file {"${install_dir}/workspace-SpacesStore/conf/ssl-repo-client-truststore-passwords.properties":
+      ensure  => file,
+      owner   => $user,
+      group   => $group,
+      mode    => '0755',
+      source => 'puppet:///modules/application/bosecr2/solr/ssl-repo-client-truststore-passwords.properties'
+  }->
+  file {"${install_dir}/archive-SpacesStore/conf/ssl.repo.client.keystore":
+      ensure  => file,
+      owner   => $user,
+      group   => $group,
+      mode    => '0755',
+      source => 'puppet:///modules/application/bosecr2/solr/ssl.repo.client.keystore'
+  }->
+  file {"${install_dir}/archive-SpacesStore/conf/ssl-repo-client-keystore-passwords.properties":
+      ensure  => file,
+      owner   => $user,
+      group   => $group,
+      mode    => '0755',
+      source => 'puppet:///modules/application/bosecr2/solr/ssl-repo-client-keystore-passwords.properties'
+  }->
+  file {"${install_dir}/archive-SpacesStore/conf/ssl.repo.client.truststore":
+      ensure  => file,
+      owner   => $user,
+      group   => $group,
+      mode    => '0755',
+      source => 'puppet:///modules/application/bosecr2/solr/ssl.repo.client.truststore'
+  }->
+  file {"${install_dir}/archive-SpacesStore/conf/ssl-repo-client-truststore-passwords.properties":
+      ensure  => file,
+      owner   => $user,
+      group   => $group,
+      mode    => '0755',
+      source => 'puppet:///modules/application/bosecr2/solr/ssl-repo-client-truststore-passwords.properties'
   }
 
 }
