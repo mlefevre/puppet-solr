@@ -50,12 +50,13 @@ class solr (
   archive { $install_archive:
     user          => $user,
     group         => $group,
-    checksum_verify  => false,
+    source        => "${archive_url}/${archive_name}",
+    temp_dir      => "/tmp",
+    cleanup       => false,
     extract       => true,
     extract_path  => $install_dir,
     creates       => "${install_dir}",
-    source        => "${archive_url}/${archive_name}",
-    cleanup       => true,
+    checksum_verify  => false,
   }->
   exec {"Configure workspace in solcore.proprerties":
     command => "sed -i -E 's|@@ALFRESCO_SOLR_DIR@@|${install_dir}|g' ${install_dir}/workspace-SpacesStore/conf/solrcore.properties ${install_dir}/archive-SpacesStore/conf/solrcore.properties"
