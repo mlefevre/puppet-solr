@@ -44,7 +44,7 @@ class solr (
     ensure => directory,
     owner => $user,
     group => $group,
-    mode => 0755,
+    mode => '0755',
   }->
   # Download and extract the alfresco archive
   archive { $install_archive:
