@@ -55,7 +55,6 @@ class solr (
     cleanup       => false,
     extract       => true,
     extract_path  => $install_dir,
-    creates       => "${install_dir}",
     checksum_verify  => false,
   }->
   exec {"Configure workspace in solcore.proprerties":
