@@ -14,9 +14,9 @@ max.field.length=2147483647
 # Properties loaded during alfresco tracking
 #
 
-alfresco.host=<%= alfresco_host %>
-alfresco.port=<%= alfresco_port %>
-alfresco.port.ssl=<%= alfresco_ssl_port %>
+alfresco.host=<%= @alfresco_host %>
+alfresco.port=<%= @alfresco_port %>
+alfresco.port.ssl=<%= @alfresco_ssl_port %>
 alfresco.baseUrl=/alfresco
 alfresco.cron=0/15 * * * * ? *
 alfresco.stores=workspace://SpacesStore
@@ -37,12 +37,12 @@ alfresco.secureComms=https
 # ssl
 alfresco.encryption.ssl.keystore.type=JCEKS
 alfresco.encryption.ssl.keystore.provider=
-alfresco.encryption.ssl.keystore.location=<%= alfresco_keystore_filename %>
-alfresco.encryption.ssl.keystore.passwordFileLocation=<%= alfresco_keystore_pwd_file %>
+alfresco.encryption.ssl.keystore.location=<%= @alfresco_keystore_filename %>
+alfresco.encryption.ssl.keystore.passwordFileLocation=<%= @alfresco_keystore_pwd_file %>
 alfresco.encryption.ssl.truststore.type=JCEKS
 alfresco.encryption.ssl.truststore.provider=
-alfresco.encryption.ssl.truststore.location=<%= alfresco_truststore_filename %>
-alfresco.encryption.ssl.truststore.passwordFileLocation=<%= alfresco_truststore_pwd_file %>
+alfresco.encryption.ssl.truststore.location=<%= @alfresco_truststore_filename %>
+alfresco.encryption.ssl.truststore.passwordFileLocation=<%= @alfresco_truststore_pwd_file %>
 
 # Tracking
 
