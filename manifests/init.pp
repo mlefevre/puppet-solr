@@ -17,8 +17,6 @@
 # Authors
 # -------
 #
-# Michael Strache <michael.strache@netcentric.biz>
-# Valentin Savenko <valentin.savenko@netcentric.biz>
 # Marc Lefèvre <mlefevre@cirb.brussels>
 #
 
@@ -29,6 +27,13 @@ class solr (
   String  $install_dir,
   String  $archive_url,
   String  $archive_name,
+  String  $alfresco_host = "localhost",
+  String  $alfresco_port = "8080",
+  String  $alfresco_ssl_port = "8443",
+  String  $alfresco_keystore_filename = "ssl.repo.client.keystore",
+  String  $alfresco_keystore_pwd_file = "ssl-repo-client-keystore-passwords.properties",
+  String  $alfresco_truststore_filename = "ssl.repo.client.truststore",
+  String  $alfresco_truststore_pwd_file = "ssl-repo-client-truststore-passwords.properties"
 ) {
 
   #------------------------------------------------------------------------------#
@@ -57,11 +62,19 @@ class solr (
     extract_path  => $install_dir,
     checksum_verify  => false,
   }->
-  exec {"Configure workspace in solcore.proprerties":
-    command => "sed -i -E 's|@@ALFRESCO_SOLR_DIR@@|${install_dir}|g' ${install_dir}/workspace-SpacesStore/conf/solrcore.properties ${install_dir}/archive-SpacesStore/conf/solrcore.properties"
+  file {"${install_dir}/archive-SpacesStore/conf/solrcore.properties":
+      ensure  => present,
+      owner   => $user,
+      group   => $group,
+      mode    => '0644',
+      content => template('solr/solrcore.erb')
   }->
-  exec {"Configure truststore and keystore in solrcore.properties":
-    command => "sed -i -E 's|=ssl-(.+)store|=ssl-repo-client-\1store|g' ${install_dir}/workspace-SpacesStore/conf/solrcore.properties ${install_dir}/archive-SpacesStore/conf/solrcore.properties"
+  file {"${install_dir}/workspace-SpacesStore/conf/solrcore.properties":
+      ensure  => present,
+      owner   => $user,
+      group   => $group,
+      mode    => '0644',
+      content => template('solr/solrcore.erb')
   }->
   file {"Remove default keystore":
     ensure => absent,
