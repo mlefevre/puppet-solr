@@ -27,13 +27,6 @@ class solr (
   String  $install_dir,
   String  $archive_url,
   String  $archive_name,
-  String  $alfresco_host = "localhost",
-  String  $alfresco_port = "8080",
-  String  $alfresco_ssl_port = "8443",
-  String  $alfresco_keystore_filename = "ssl.repo.client.keystore",
-  String  $alfresco_keystore_pwd_file = "ssl-repo-client-keystore-passwords.properties",
-  String  $alfresco_truststore_filename = "ssl.repo.client.truststore",
-  String  $alfresco_truststore_pwd_file = "ssl-repo-client-truststore-passwords.properties"
 ) {
 
   #------------------------------------------------------------------------------#
