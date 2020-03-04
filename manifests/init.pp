@@ -62,19 +62,17 @@ class solr (
     extract_path  => $install_dir,
     checksum_verify  => false,
   }->
-  file {"${install_dir}/archive-SpacesStore/conf/solrcore.properties":
-      ensure  => present,
-      owner   => $user,
-      group   => $group,
-      mode    => '0644',
-      content => template('solr/solrcore.erb')
+  solr::solrcore {'archive':
+    core_name => 'archive',
+    user          => $user,
+    group         => $group,
+    install_dir => $install_dir	,
   }->
-  file {"${install_dir}/workspace-SpacesStore/conf/solrcore.properties":
-      ensure  => present,
-      owner   => $user,
-      group   => $group,
-      mode    => '0644',
-      content => template('solr/solrcore.erb')
+  solr::solrcore {'workspace':
+    core_name => 'workspace',
+    user          => $user,
+    group         => $group,
+    install_dir => $install_dir,
   }->
   file {"Remove default keystore":
     ensure => absent,
